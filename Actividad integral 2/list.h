@@ -138,15 +138,15 @@ T List<T>::findSong(T val) const {
 
 	p = head;
     int index=0;
-	while (p != 0) {
-		if (p->value == val) {
-            cout<<"La cancion se encuentra en la lista: "<<"'"<<p->value<<"'"<<endl;
+	while (p != 0) { //itera sobre la lista
+		if (p->value == val) {//si el valor buscado es igual al de p actual
+            cout<<"La cancion se encuentra en la lista: "<<"'"<<p->value<<"'"<<endl;//se imprime
             return "";
 		}
 		p = p->next;
         index++;
 	}
-    cout<<"la cancion no existe"<<endl;
+    cout<<"la cancion no existe"<<endl;//si no es igual entonces no existe
 	return "";
 }
 
@@ -157,12 +157,12 @@ bool verArchivo(List<T>& vinilist, string nombrearch) {
 	ifstream arch(nombrearch);
 	if (!arch) {
 		cout << "No se encuentra el archivo: " << nombrearch << endl;
-		return false;
+		return false; //si no está el archivo
 	}
 	string linea;
 	while (getline(arch, linea)) { //saca una linea del archivo y lo guarda en string linea
 		if (linea.size() > 0) {
-			vinilist.addSong(linea);
+			vinilist.addSong(linea);//agrega cada linea del txt como un objeto de la lista
 		}
 	}
 	arch.close();
@@ -172,16 +172,16 @@ bool verArchivo(List<T>& vinilist, string nombrearch) {
 /////////////////escribir/////////////////
 template <class T>
 void List<T>::escribir(string myfile){
-	ofstream arch;
-    arch.open (myfile);
+	ofstream arch; //archivo en modo output
+    arch.open (myfile);//abrir el archivo
 	Link<T> *p;
     p = head;
-	while (p != 0) {
-        arch<< p->value << endl;
+	while (p != 0) {//iteramos sobre la lista
+        arch<< p->value << endl;//para cada elemento sobre el que pasa se imprimirá en arch
 		//cout<<"\n";
         p = p->next;
 	}
-    arch.close();
+    arch.close();// se cierra el archivo
 }
 
 //////////////// Ver canciones desde lista //////////////
@@ -189,82 +189,13 @@ template <class T>
 void List<T>::verlista(){
     Link<T> *p;
     p = head;
-	while (p != 0) {
-        cout<< p->value << endl;
+	while (p != 0) {//itera
+        cout<< p->value << endl;//en cada iteracion imprime el value de p
 		cout<<"\n";
         p = p->next;
 	}
 }
 
-//////////////////////////////////clase canciones////////////////////////////
-template <class T>
-class Canciones {
-public:
-	Canciones();
-	Canciones(const Canciones<T>&);
-	~Canciones();
-
-	void addFirst(T);
-	void addSong(T);
-	T findSong(T) const;
-	bool empty() const;
-	//std::string toString() const;
-	void operator= (const Canciones&);
-
-private:
-	Link<T> *head;
-	int size;
-};
-
-/////////////////add///////////////////////////////////////
-template <class T>
-void Canciones<T>::addFirst(T val){
-	Link<T> *newLink;
-	newLink = new Link<T>(val);
-	newLink->next = head;
-	head = newLink;
-	size++;
-}
-
-template <class T>
-void Canciones<T>::addSong(T val){
-	Link<T> *newLink, *p;
-	newLink = new Link<T>(val);
-	if (empty()) {
-		addFirst(val);
-		return;
-	}
-	p = head;
-	while (p->next != 0) {
-		p = p->next;
-	}
-	newLink->next = 0;
-	p->next = newLink;
-	size++;
-}
-
-void findSong(ifstream &archivo, string cancionbuscada){
-    archivo.open("canciones.txt", ios::in);
-    string cancion, artista, anio;
-    int aux = 0;
-    archivo>>cancion;
-    while(!archivo.eof() && aux == 0){
-        archivo>>artista;
-        archivo>>anio;
-        if(cancion == cancionbuscada){
-            cout << "La cancion es: "<< endl;
-            cout<<cancion<<" "<<artista<<" "<<anio<<endl;
-			cout<<"\n";
-            aux = 1;
-        }
-        archivo>>cancion;
-    }
-    archivo.close();
-    if (aux == 0){
-        cout << "La cancion no existe"<<endl;
-		cout<<"\n";
-    }
-}
 
 /*
 //////////////////////findSong////////////////////////////
