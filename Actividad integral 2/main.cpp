@@ -1,6 +1,9 @@
+//En esta entrega del proyecto integrador se implementaron las funciones agregar buscar y ver en una lista ligada
+//Aun hay fallas, se mejorarán en las siguientes entregas
+//para esta entrega se Agregaron los casos de prueba que faltaban y algunos comentarios sobre el código
 #include <iostream>
 #include <string>
-#include <fstream>
+#include <fstream> //para el manejo de archivos
 #include "list.h"
 
 using namespace std;
@@ -11,11 +14,11 @@ int main(){
     ifstream archivo;
     ofstream write;
 
-    verArchivo(vinilist, "canciones.txt");
-
-
-
-	cout << "===== Bienvenido =====" << endl;
+    verArchivo(vinilist, "canciones.txt"); //se manda a llamar verarchivo que guarda las lineas del txt en una lista
+//menu de funciones
+//es importante saber que el menú aún no esta listo, pues en ciertos casos el programa truena
+//checar casos de prueba
+cout << "===== Bienvenido =====" << endl;
     while (opcion != 4){
         cout << "-Ver lista(1)" << endl;
         cout << "-Buscar elemento (2)" << endl;
@@ -23,7 +26,11 @@ int main(){
         cout << "-Salir(4)" << endl;
         cout<< "-->";
         cin >> opcion;
-
+	while(opcion!=1 and opcion!=2){
+	    cout<<"Por favor ingrese 1 o 2: ";
+	    cin >> opcion;
+	}
+	//en esta parte aun no se limitan los inputs para que no sean string, por lo que si se pasa un string se loopea
         if (opcion==1){
             vinilist.verlista();
         }
@@ -32,6 +39,12 @@ int main(){
             cout<<"Escribe la cancion que quieres buscar: ";
             cin>>cancionbuscada;
             findSong(archivo, cancionbuscada);
+	    //caso de prueba 1	
+		//findSong(archivo, zombie) //deberia arrojar la cancion zombie de cranberries
+	    //caso de prueba 2
+		//findSong(archivo, cranberries) //arroja que no existe la cancion porque el criterio de busqueda es por nombre de las canciones
+	    //caso de prueba 3
+		//findSong(archivo, zombie cranberries 1993) //se loopea porque no entiende los espacios (se corregirá en la siguiente entrega)
         }
         else if (opcion==3){
             string nuevacancion;
@@ -39,10 +52,15 @@ int main(){
             cin>>nuevacancion;
             vinilist.addSong(nuevacancion);
             vinilist.escribir("newlist.txt");
+	    // en este caso se agrega una nueva cancion a la lista y se escribe toda la lista en un nuevo archivo de texto
+	    //aun no se puede buscar una cancion que agrega el usuario porque la busqueda se realiza desde el archivo de texto principal
+	    // caso de prueba 4
+		//vinilist.addSong(Dove_Cymande_2018) //agrega una cancion separada por _
+	    //caso de pureba 5
+		//vinilist.addSong(Dove Cymande) //se loopea por los espacios (se corregira)
+	    
         }
-        else if (opcion==5){
-
-        }
+       
     }
     return 0;
 }
