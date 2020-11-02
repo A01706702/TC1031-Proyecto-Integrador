@@ -1,3 +1,9 @@
+/* ** Jose Pablo Miranda Berumen
+   ** A01706702
+   ** 2/nov/2020
+   ** Entrega 3 Proyecto integrador
+*/
+
 #ifndef TREE_H
 #define TREE_H
 
@@ -25,7 +31,6 @@ private:
 
 public:
 	Node(T);
-	Node(T,T,T);
 	Node(T,Node<T>*,Node<T>*,Node<T>*);
 	Node<T>*add(T);
 	Node<T>*add(T,T,T);
@@ -43,9 +48,6 @@ public:
 ///////////////////////constructor///////////////////
 template <class T>
 Node<T>::Node(T val): value(val),size(0),left(0),right(0),parent(0) {}
-
-template <class T>
-Node<T>::Node(T canc, T art, T ani): size(0) {}
 
 template <class T>
 Node<T>::Node(T val,Node<T> *le,Node<T> *ri,Node<T> *p)
@@ -85,7 +87,8 @@ Node<T>* Node<T>::add(T canc, T art, T ani){
 			return left->add(canc,art,ani);
 		}
 		else{
-			left=new Node<T>(canc, art, ani);
+			T val = canc + " " + art + " " + ani;
+			left=new Node<T>(val);
 			left->parent =this;
 			return left;
 		}
@@ -94,7 +97,8 @@ Node<T>* Node<T>::add(T canc, T art, T ani){
 		if(right !=0){
 			return right->add(canc,art,ani);
 		}else{
-			right=new Node<T>(canc,art,ani);
+			T val = canc + " " + art + " " + ani;
+			right=new Node<T>(val);
 			right->parent=this;
 			return right;
 		}
@@ -341,14 +345,14 @@ void Node<T>::preorder(std::stringstream &aux) const {
 template <class T>
 void Node<T>::verlista(std::stringstream &aux) const {
 	if (parent != 0){
-		aux << "\n node " << value;
-		aux << " parent " << parent->value;
+		aux << "\n NODE: " << value;
+		aux << " PARENT: " << parent->value;
 	}else
-		aux << "\n root " << value;
+		aux << "\n ROOT: " << value;
 	if (left != 0)
-		aux << " left " << left->value;
+		aux << " LEFT: " << left->value;
 	if (right != 0)
-		aux << " right " << right->value;
+		aux << " RIGHT: " << right->value;
 	aux << "\n";
 
 	if (left != 0) {
@@ -368,7 +372,6 @@ private:
 
 public:
 	SplayTree();
-	SplayTree(T,T,T);
 	~SplayTree();
 	void add(T);
 	void add(T,T,T);
@@ -388,9 +391,6 @@ public:
 //////////////////constr///////////////////
 template <class T>
 SplayTree<T>::SplayTree():root(0), size(0) {}
-
-template <class T>
-SplayTree<T>::SplayTree(T canc, T art, T ani):root(0), size(0) {}
 
 template<class T>
 SplayTree<T>::~SplayTree() {
@@ -425,7 +425,8 @@ void SplayTree<T>::add(T canc, T art, T ani){
 		root=root->splay(root,added);
 	}
 	else{
-		root=new Node<T>(canc,art,ani);
+		T val = canc + " " + art + " " + ani;
+		root=new Node<T>(val);
 	}
 	size++;
 }
@@ -478,6 +479,7 @@ bool SplayTree<T>::find(T val){
 		cout<<"La cancion es.....: "<<root->value;
 		return(root->value==val);
 	}
+
 	else{
 		cout<<"La cancion no existe..."<<endl;
 		return false;
@@ -547,16 +549,20 @@ template <class T>
 void SplayTree<T>::escribir(string myfile){
 	ofstream arch;
     arch.open (myfile);
+	/*
 	Node<T> *p;
-    // p = head;
-	// while (p != 0) {
-    //     arch<< p->value << endl;
-	// 	//cout<<"\n";
-    //     p = p->next;
-	// }
-	arch<< p->value << endl;
+    p = head;
+	while (p != 0) {
+        arch<< p->value << endl;
+		//cout<<"\n";
+        p = p->next;
+	}
+	if (){
+		arch<< p->value << endl;
+	}
 
-    arch.close();
+	*/
+	arch.close();
 }
 
 
@@ -581,22 +587,6 @@ void findSong(ifstream &archivo, string cancionbuscada){
     if (aux == 0){
         cout << "La cancion no existe"<<endl;
 		cout<<"\n";
-    }
-}
-
-template <class T>
-bool SplayTree<T>::search(SplayTree *root, string n){
-    if(root == NULL){           //Si el árbol esta vacio
-        return false;
-    }
-    else if(root->value == n){   //Si el nodo es igual al elemento
-        return true;
-    }
-    else if(n < root->value){
-        return search(root->left, n);
-    }
-    else{
-        return search(root->right, n);
     }
 }
 
