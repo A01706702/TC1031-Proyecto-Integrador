@@ -1,6 +1,13 @@
-//En esta entrega del proyecto integrador se implementaron las funciones agregar buscar y ver en una lista ligada
+/* ** Jose Pablo Miranda Berumen
+   ** A01706702
+   ** 2/nov/2020
+   ** Entrega 3 Proyecto integrador
+*/
+
+//En esta entrega del proyecto integrador se implementaron las funciones agregar buscar y ver en un arbol splay
 //Aun hay fallas, se mejorarán en las siguientes entregas
-//para esta entrega se Agregaron los casos de prueba que faltaban y algunos comentarios sobre el código
+//para esta entrega se Agregaron los casos de prueba que faltaban para la entrega 2 y algunos comentarios sobre el código y se cumple la competencia de implementación de un arbol y lectura de archivos
+
 #include <iostream>
 #include <string>
 #include <fstream> //para el manejo de archivos
@@ -15,11 +22,13 @@ int main(){
     ifstream archivo;
     ofstream write;
 
-    verArchivo(vinitree, "canciones.txt"); //se manda a llamar verarchivo que guarda las lineas del txt en una lista
-    //vinitree.escribir("newlist.txt");
+    verArchivo(vinitree, "canciones.txt"); //se manda a llamar verarchivo que guarda las lineas del txt en el arbol
+    //vinitree.escribir("newlist.txt"); //debería imprimirse los datos en el arbol, pero aún no se implementa la función de manera correcta
+
 //menu de funciones
 //es importante saber que el menú aún no esta listo, pues en ciertos casos el programa truena
 //checar casos de prueba
+
 cout << "===== Bienvenido =====" << endl;
     while (opcion != 4){
         cout << "-Ver lista(1)" << endl;
@@ -28,29 +37,30 @@ cout << "===== Bienvenido =====" << endl;
         cout << "-Salir(4)" << endl;
         cout<< "-->";
         cin >> opcion;
-	// while(opcion!=1 and opcion!=2 and opcion!=3 and opcion!=4){
-	//     cout<<"Por favor ingrese 1, 2, 3 o 4: ";
-	//     cin >> opcion;
-    // }
+
 
 	//en esta parte aun no se limitan los inputs para que no sean string, por lo que si se pasa un string se loopea
         if (opcion==1){
-            //vinitree.inorder();
             cout<<vinitree.verlista();
-            //cout<<vinitree.toString();
         }
         else if (opcion==2){
             string cancionbuscada;
             cout<<"Escribe la cancion que quieres buscar: ";
             cin>>cancionbuscada;
-            //vinitree.find(cancionbuscada);
+            //vinitree.find(cancionbuscada); //busqueda desde tree
             findSong(archivo,cancionbuscada);
-	    //caso de prueba 1
-		//findSong(archivo, zombie) //deberia arrojar la cancion zombie de cranberries
-	    //caso de prueba 2
-		//findSong(archivo, cranberries) //arroja que no existe la cancion porque el criterio de busqueda es por nombre de las canciones
-	    //caso de prueba 3
-		//findSong(archivo, zombie cranberries 1993) //se loopea porque no entiende los espacios (se corregirá en la siguiente entrega)
+
+            //La búsqueda se realiza en el archivo de texto porque aún no está implementado totalmente en el árbol.
+            //Por eso mismo, si se agrega un elemento nuevo al árbol no se desplegará con el find
+
+            /*
+    	    //caso de prueba 1
+    		findSong(archivo, zombie) //deberia arrojar la cancion zombie de cranberries
+    	    //caso de prueba 2
+    		findSong(archivo, cranberries) //arroja que no existe la cancion porque el criterio de busqueda es por nombre de las canciones
+    	    //caso de prueba 3
+    		findSong(archivo, zombie cranberries 1993) //se loopea porque no entiende los espacios (se corregirá en la siguiente entrega)
+            */
         }
         else if (opcion==3){
             string nuevacancion;
@@ -65,14 +75,22 @@ cout << "===== Bienvenido =====" << endl;
             vinitree.add(nuevacancion, artista, anio);// se agrega conforme a los inputs
             //vinitree.escribir("canciones.txt");
 
-	    // en este caso se agrega una nueva cancion a la lista y se escribe toda la lista en un nuevo archivo de texto
-	    // caso de prueba 4
-		//vinitree.addSong(Dove_Cymande_2018) //agrega una cancion separada por _
-	    //caso de pureba 5
-		//vinitree.addSong(Dove Cymande) //se loopea por los espacios (se corregira)
+    	    // en este caso se agrega una nueva cancion al árbol y se escribe toda la lista en el archivo de texto (aun falta escritura)
+
+            /*
+    	    // caso de prueba 4
+    		vinitree.add(Dove_Cymande_2018) //agrega una cancion separada por _
+    	    //caso de pureba 5
+    		vinitree.add(Dove Cymande) //se loopea por los espacios (se corregira)
+            */
         }
 
     }
     return 0;
 }
-//hacer el find pero con espacios
+
+// TO DO:
+// hacer el find pero con espacios y en el arbol
+// hacer find por rango (separar por objetos)
+// Escritura de archivos
+// usar structs
