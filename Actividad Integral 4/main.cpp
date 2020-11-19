@@ -10,9 +10,8 @@ int main(){
     Graph<string> vg;
     ifstream archivo;
     ofstream write;
-    info_archivo(vg);
-    read_conections(vg); //se manda a llamar verarchivo que guarda las lineas del txt en el arbol
-    //vinitree.escribir("newlist.txt"); //debería imprimirse los datos en el arbol, pero aún no se implementa la función de manera correcta
+    info_archivo(vg);//se manda a llamar info_archivo que guarda las lineas del txt en el grafo
+    read_conections(vg);//read conections lee las relaciones entre los nodos (aristas) del csv. EN este caso las conexiones serían la playlist o cola de canciones en la que se encuentran
 
 //menu de funciones
 //es importante saber que el menú aún no esta listo, pues en ciertos casos el programa truena
@@ -27,7 +26,6 @@ cout << "===== Bienvenido =====" << endl;
         cout<< "-->";
         cin >> opcion;
 
-
 	//en esta parte aun no se limitan los inputs para que no sean string, por lo que si se pasa un string se loopea
         if (opcion==1){
             cout<<vg.print_nodes_list();
@@ -37,19 +35,18 @@ cout << "===== Bienvenido =====" << endl;
             string cancionbuscada;
             cout<<"Escribe la cancion que quieres buscar: ";
             cin>>cancionbuscada;
-            //vinitree.find(cancionbuscada); //busqueda desde tree
-            findSong(archivo,cancionbuscada);
-
-            //La búsqueda se realiza en el archivo de texto porque aún no está implementado totalmente en el árbol.
-            //Por eso mismo, si se agrega un elemento nuevo al árbol no se desplegará con el find
+            vg.find(cancionbuscada); //busqueda desde grafo
+            //findSong(archivo,cancionbuscada); //desde archivo
 
             /*
     	    //caso de prueba 1
-    		findSong(archivo, zombie) //deberia arrojar la cancion zombie de cranberries
+    		vg.find(zombie) //deberia arrojar la cancion zombie de cranberries
     	    //caso de prueba 2
-    		findSong(archivo, cranberries) //arroja que no existe la cancion porque el criterio de busqueda es por nombre de las canciones
+    		vg.find(cranberries) //arroja que no existe la cancion porque el criterio de busqueda es por nombre de las canciones
+            //esto se puede mejorar fácil pues los datos tienen su vector respectivamente
     	    //caso de prueba 3
-    		findSong(archivo, zombie cranberries 1993) //se loopea porque no entiende los espacios (se corregirá en la siguiente entrega)
+            vg.find(zombie cranberries 1993)
+    		findSong(archivo, zombie cranberries 1993) //se loopean porque no entiende los espacios (se corregirá proximamente)
             */
         }
         else if (opcion==3){
@@ -66,13 +63,14 @@ cout << "===== Bienvenido =====" << endl;
             vg.escribir("canciones.txt");
             cout<<"\n";
 
-    	    // en este caso se agrega una nueva cancion al árbol y se escribe toda la lista en el archivo de texto (aun falta escritura)
+    	    // en este caso se agrega una nueva cancion al graph y se escribe toda la lista en el archivo de texto
 
             /*
     	    // caso de prueba 4
-    		vinitree.add(Dove_Cymande_2018) //agrega una cancion separada por _
-    	    //caso de pureba 5
-    		vinitree.add(Dove Cymande) //se loopea por los espacios (se corregira)
+    		vg.add_node(Dove Cymande) //se loopea por los espacios (se corregira)
+
+            // caso de prueba 5
+    		vg.add_node(Dove, Cymande, 2012) //se agrega correctamente
             */
         }
 
