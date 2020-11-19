@@ -19,41 +19,18 @@ private:
 	vector<vector<int>> adj_list;
     vector<T> song_details;
 public:
-    Graph(){}
+    Graph(){} //constr
     Graph(bool d);
     void add_node(T);
     void add_node(T,T,T); //addsong
 	void add_edge(T nodo_origen, T nodo_destino); //add relacion
-    vector<T> BFS(int nodo_origen, int nodo_destino);
-    bool empty();
-    int tam();
+    //vector<T> BFS(int nodo_origen, int nodo_destino);
     bool find(string);
-    string print_nodes_list();
-    void escribir(string);
+    string print_nodes_list(); //para mostrar las canciones
+    void escribir(string); //para sobreescribir archivo de texto
 };
 
-
-// template<class T>
-// bool Graph<T>::empty(){
-//     if (h==NULL){
-//         return true;
-//     }
-//     else{
-//         return false;
-//     }
-// }
-
-// template<class T>
-// int Graph<T>::tam(){
-//     int count=0;
-//     Node<T> *aux;
-//     aux=h;
-//     while (aux!=0){
-//         count ++;
-//         aux = aux->next;
-//     }
-//     return count;
-// }
+////////////////funciones////////////////////
 
 template<class T>
 string Graph<T>::print_nodes_list(){
@@ -68,11 +45,11 @@ template<class T>
 bool Graph<T>::find(string cancion){
     for (int i=0; i<nodes_list.size(); i++){
         if(nodes_list[i] == cancion){
-            cout<<"La cancion es: "<<nodes_list[i]<<endl;
+            cout<<"La cancion es: "<<nodes_list[i]+" " + song_details[i]<<endl;
             return true;
         }
     }
-    cout<<"La cancion no se encuentra en la lista"<<endl;
+    cout<<"La cancion no se encuentra en la lista\n";
     return false;
 }
 
@@ -80,10 +57,12 @@ template<class T>
 void Graph<T>::add_node(T song){
 	// Check if value already in nodes list
 	for (int i=0; i<nodes_list.size(); i++){
-		if (nodes_list[i] == song) return;
+		if (nodes_list[i] == song) {
+            return;
+        }
 	}
 	nodes_list.push_back(song);
-	// Expand the adjecency list
+	//adjecency list
 	vector<int> new_row;
 	adj_list.push_back(new_row);
 }
@@ -94,17 +73,17 @@ void Graph<T>::add_node(T song, T artist, T year){
 	// Check if value already in nodes list
 	for (int i=0; i<nodes_list.size(); i++){
 		if (nodes_list[i] == song) {
-            return;
+            return;//si ya existe
         }
 	}
 	nodes_list.push_back(song);
     song_details.push_back(val);
-	// Expand the adjecency list
+	//adjecency list
 	vector<int> new_row;
 	adj_list.push_back(new_row);
 }
 
-
+/////////////////////agregar aristas/////////////////
 template<class T>
 void Graph<T>::add_edge(T valor_origen, T valor_destino){
     int nodo_origen = -1;
@@ -127,6 +106,7 @@ void Graph<T>::add_edge(T valor_origen, T valor_destino){
 		adj_list[nodo_destino].push_back(nodo_origen);
 }
 
+/*
 template<class T>
 vector<T> Graph<T>::BFS(int nodo_origen, int nodo_destino){
 	vector<int> queue;
@@ -152,43 +132,37 @@ vector<T> Graph<T>::BFS(int nodo_origen, int nodo_destino){
 
 	return path;
 }
+*/
 
 ////////////////////archivos////////////////////////
 void info_archivo(Graph<string> &graph){
 	// Read file
 	ifstream file;
 	file.open("canciones.txt");
-
 	while(file.good()){
 		string song;
 		string artist;
 		string year;
-		// Read line
 		getline(file, song, ' ');
 		getline(file, artist, ' ');
 		getline(file, year, '\n');
-		// Add node
         //graph.add_node(song);
 		graph.add_node(song,artist,year);
 	}
 	file.close();
 }
 
-
+/////////////////aristas////////////////////////
 void read_conections(Graph<string> &graph){
-	// Read file
 	ifstream file;
 	file.open("cola.csv");
-
 	while(file.good()){
 		string cancion1;
 		string cancion2;
 		string playlist;
-		// Read line
 		getline(file, cancion1, ',');
 		getline(file, cancion2, ',');
 		getline(file, playlist, '\n');
-		// Add edge
 		graph.add_edge(cancion1, cancion2);
 	}
 	file.close();
@@ -217,6 +191,7 @@ void findSong(ifstream &archivo, string cancionbuscada){
     }
 }
 
+/////////////////////escritura//////////////////
 template <class T>
 void Graph<T>::escribir(string myfile){
 	ofstream arch;
