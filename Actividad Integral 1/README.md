@@ -1,6 +1,11 @@
 Actividad Integral 1 Conceptos Básicos y Algoritmos Fundamentales
 ===
 
+Correcciones
+---
+
+- Se agregaron casos de prueba y comentarios al código
+
 Descripción
 ---
 
