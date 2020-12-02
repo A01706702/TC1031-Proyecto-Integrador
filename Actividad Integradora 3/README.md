@@ -1,6 +1,13 @@
 Actividad Integral 3 Árboles
 ===
 
+Correcciones
+---
+
+- Se agregaron casos de prueba y comentarios al código.
+- Se implementó la escritura de archivos.
+- El find ahora funciona para canciones recientemente agregadas
+
 Descripción
 ---
 
