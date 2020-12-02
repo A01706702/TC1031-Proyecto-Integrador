@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <string>
+
 #include <sstream>
 #include <cstring>
 #include <fstream>
@@ -319,7 +320,7 @@ void Node<T>::inorder(std::stringstream &aux) const {
 		left->inorder(aux);
 	}
 	if(aux.tellp()!=1){
-		aux<<" ";
+		aux<<"\n";
 	}
 	aux<<value;
 	if(right!=0){
@@ -345,14 +346,14 @@ void Node<T>::preorder(std::stringstream &aux) const {
 template <class T>
 void Node<T>::verlista(std::stringstream &aux) const {
 	if (parent != 0){
-		aux << "\n NODE: " << value;
-		aux << " PARENT: " << parent->value;
+		aux << "\n 		NODE: " << value << endl;
+		aux << " 		PARENT: " << parent->value << endl;
 	}else
-		aux << "\n ROOT: " << value;
+		aux << "\n 		ROOT: " << value << endl;
 	if (left != 0)
-		aux << " LEFT: " << left->value;
+		aux << " <----- LEFT: " << left->value;
 	if (right != 0)
-		aux << " RIGHT: " << right->value;
+		aux << " RIGHT -----> : " << right->value;
 	aux << "\n";
 
 	if (left != 0) {
@@ -378,7 +379,7 @@ public:
 	bool find(T);
 	void remove(T);
 	void removeAll();
-	std::string verlista() const;
+	string verlista() const;
 	void escribir(string);
 	bool search(SplayTree *,string n);
 
@@ -491,11 +492,11 @@ template<class T>
 std::string SplayTree<T>::inorder() const{
 	std::stringstream aux;
 
-	aux<<"[";
+	aux<<"";
 	if(!empty()){
 		root->inorder(aux);
 	}
-	aux<<"]";
+	aux<<"";
 	return aux.str();
 }
 
@@ -549,26 +550,15 @@ template <class T>
 void SplayTree<T>::escribir(string myfile){
 	ofstream arch;
     arch.open (myfile);
-	/*
-	Node<T> *p;
-    p = head;
-	while (p != 0) {
-        arch<< p->value << endl;
-		//cout<<"\n";
-        p = p->next;
+	if (arch.is_open()){
+		arch<<inorder();
 	}
-	if (){
-		arch<< p->value << endl;
-	}
-
-	*/
 	arch.close();
 }
 
-
 //////////////////////findSong desde archivo///////////////////////////
 void findSong(ifstream &archivo, string cancionbuscada){
-    archivo.open("canciones.txt", ios::in);
+    archivo.open("newlist.txt", ios::in);
     string cancion, artista, anio;
     int aux = 0;
     archivo>>cancion;
