@@ -6,7 +6,7 @@
 
 //En esta entrega del proyecto integrador se implementaron las funciones agregar buscar y ver en un arbol splay
 //Aun hay fallas, se mejorarán en las siguientes entregas
-//para esta entrega se Agregaron los casos de prueba que faltaban para la entrega 2 y algunos comentarios sobre el código y se cumple la competencia de implementación de un arbol y lectura de archivos
+//para esta entrega se Agregaron los casos de prueba que faltaban para la entrega 2 y algunos comentarios sobre el código y se cumple la competencia de implementación de un arbol, casos de prueba, lectura y escritura de archivos
 
 #include <iostream>
 #include <string>
@@ -20,24 +20,22 @@ int opcion;
 int main(){
     SplayTree<string> vinitree;
     ifstream archivo;
-    ofstream write;
 
     verArchivo(vinitree, "canciones.txt"); //se manda a llamar verarchivo que guarda las lineas del txt en el arbol
-    //vinitree.escribir("newlist.txt"); //debería imprimirse los datos en el arbol, pero aún no se implementa la función de manera correcta
-
+    vinitree.escribir("newlist.txt");
 //menu de funciones
 //es importante saber que el menú aún no esta listo, pues en ciertos casos el programa truena
 //checar casos de prueba
 
 cout << "===== Bienvenido =====" << endl;
     while (opcion != 4){
-        cout << "-Ver lista(1)" << endl;
+        cout << "-Ver Arbol(1)" << endl;
         cout << "-Buscar elemento (2)" << endl;
         cout << "Agregar elemento (3)" << endl;
         cout << "-Salir(4)" << endl;
         cout<< "-->";
+        //cout<<vinitree.inorder();
         cin >> opcion;
-
 
 	//en esta parte aun no se limitan los inputs para que no sean string, por lo que si se pasa un string se loopea
         if (opcion==1){
@@ -47,11 +45,8 @@ cout << "===== Bienvenido =====" << endl;
             string cancionbuscada;
             cout<<"Escribe la cancion que quieres buscar: ";
             cin>>cancionbuscada;
-            //vinitree.find(cancionbuscada); //busqueda desde tree
+            //vinitree.find(cancionbuscada); // hacer busqueda desde tree
             findSong(archivo,cancionbuscada);
-
-            //La búsqueda se realiza en el archivo de texto porque aún no está implementado totalmente en el árbol.
-            //Por eso mismo, si se agrega un elemento nuevo al árbol no se desplegará con el find
 
             /*
     	    //caso de prueba 1
@@ -73,9 +68,11 @@ cout << "===== Bienvenido =====" << endl;
             cout<<"Escribe el anio: ";
             cin>>anio;
             vinitree.add(nuevacancion, artista, anio);// se agrega conforme a los inputs
-            //vinitree.escribir("canciones.txt");
+            vinitree.escribir("newlist.txt");
+            cout<<"Cancion Agregada!"<<endl;
+            cout<<"\n";
 
-    	    // en este caso se agrega una nueva cancion al árbol y se escribe toda la lista en el archivo de texto (aun falta escritura)
+    	    // en este caso se agrega una nueva cancion al árbol y se escribe toda la lista en un archivo de texto
 
             /*
     	    // caso de prueba 4
@@ -92,5 +89,3 @@ cout << "===== Bienvenido =====" << endl;
 // TO DO:
 // hacer el find pero con espacios y en el arbol
 // hacer find por rango (separar por objetos)
-// Escritura de archivos
-// usar structs
