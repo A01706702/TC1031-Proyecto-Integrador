@@ -2,7 +2,7 @@ TC1031-Proyecto-Integrador
 ===
 Repo Integradoras (Mini Proyectos o Proyecto) (Solución de problemas Mediante el uso de estructuras)
 
-Correcciones de actividades formativas
+Correcciones de proyectos integradores
 ===
 
 ### Actividad Integral 1 ###
