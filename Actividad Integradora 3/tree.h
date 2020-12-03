@@ -351,9 +351,9 @@ void Node<T>::verlista(std::stringstream &aux) const {
 	}else
 		aux << "\n 		ROOT: " << value << endl;
 	if (left != 0)
-		aux << " <----- LEFT: " << left->value;
+		aux << " LEFT: " << left->value;
 	if (right != 0)
-		aux << " RIGHT -----> : " << right->value;
+		aux << " RIGHT: " << right->value;
 	aux << "\n";
 
 	if (left != 0) {
