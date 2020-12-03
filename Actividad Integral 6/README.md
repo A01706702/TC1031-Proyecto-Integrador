@@ -13,3 +13,9 @@ Análisis de Complejidad:
 ---
 
 O(log(n))
+
+Visualización:
+---
+
+En el siguiente link se puede visualizar el funcionamiento de un fenwick tree: https://visualgo.net/bn/fenwicktree
+Es muy explícito que para realizar la suma no se tiene que recorrer todo el arreglo sino simplemente sumar el elemento anterior.
