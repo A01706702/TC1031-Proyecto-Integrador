@@ -22,3 +22,8 @@ Comp: implementa mecanismos de escritura de archivos correctos en todos los prog
 - Se agregaron casos de prueba y comentarios al código.
 - Se implementó la escritura de archivos.
 - El find ahora funciona para canciones recientemente agregadas
+
+### Actividad Integral 6 (EXTRA) ###
+
+Comp: TODAS
+- Se realizó la actividad completando todas las competencias de la entrega.
